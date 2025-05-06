@@ -5,7 +5,7 @@
             <div class="flex space-x-4 items-center">
 
 
-                <a href="/" class="flex items-center py-5 px-2 text-gray-700 hover:text-gray-900">
+                <a href="/dashboard" class="flex items-center py-5 px-2 text-gray-700 hover:text-gray-900">
                     <svg class="h-6 w-6 mr-1 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11c0-1.657-2-4-2-4s-2 2.343-2 4a2 2 0 002 2 2 2 0 002-2z" />
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 21H4a2 2 0 01-2-2v-7a8 8 0 0116 0v7a2 2 0 01-2 2z" />

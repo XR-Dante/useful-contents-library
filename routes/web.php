@@ -1,6 +1,11 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Web\AuthorsController;
+use App\Http\Controllers\Web\CategoriesController;
+use App\Http\Controllers\Web\ContentsController;
+use App\Http\Controllers\Web\GenresController;
+use App\Http\Controllers\Web\HomeController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -25,3 +30,11 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+
+Route::middleware('auth')->group(function () {
+    Route::resource('/contents', ContentsController::class);
+    Route::resource('/authors', AuthorsController::class);
+    Route::resource('/genres', GenresController::class);
+    Route::resource('/categories', CategoriesController::class);
+});
