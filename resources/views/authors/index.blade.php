@@ -21,12 +21,18 @@
                     <td>{{ $author->name }}</td>
                     <td>{{ $author->url }}</td>
                     <td>
+                        @can('edit')
                         <a href="{{ route('authors.edit', $author->id) }}" class="btn btn-warning">Edit</a>
+                        @endcan
+
+                        @can('delete')
                         <form action="{{ route('authors.destroy', $author->id) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger">Delete</button>
                         </form>
+                            @endcan
+
                     </td>
                 </tr>
             @endforeach

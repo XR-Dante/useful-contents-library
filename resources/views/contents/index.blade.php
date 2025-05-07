@@ -40,8 +40,13 @@
                             @endunless
                         </div>
 
+
                         <div class="card-footer d-flex justify-content-between">
+                            @hasrole('admin')
+                            @can('edit')
                             <a href="{{ route('contents.edit', $content->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                            @endcan
+                            @endhasrole
                             <form action="{{ route('contents.destroy', $content->id) }}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')

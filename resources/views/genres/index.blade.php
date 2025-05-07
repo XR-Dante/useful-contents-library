@@ -18,12 +18,20 @@
                     <td>{{ $genre->id }}</td>
                     <td>{{ $genre->name }}</td>
                     <td>
+                        @hasrole('admin')
+                        @can('edit')
                         <a href="{{ route('genres.edit', $genre->id) }}" class="btn btn-warning">Edit</a>
+                        @endcan
+                        @endhasrole
+                        @hasrole('admin')
+                        @can('edit')
                         <form action="{{ route('genres.destroy', $genre->id) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger">Delete</button>
                         </form>
+                            @endcan
+                        @endhasrole
                     </td>
                 </tr>
             @endforeach

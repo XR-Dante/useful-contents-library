@@ -11,6 +11,7 @@ class Author extends Model
 
     protected $fillable = ['name', 'url'];
 
+
     public function contents()
     {
         return $this->belongsToMany(Content::class, 'author_content');
