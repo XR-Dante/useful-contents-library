@@ -53,6 +53,7 @@
                                 <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                             </form>
                         </div>
+                        @dump($content->authors)
 
                     </div>
                 </div>

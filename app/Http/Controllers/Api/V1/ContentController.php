@@ -12,8 +12,7 @@ class ContentController
      */
     public function index()
     {
-        $contents=Content::all();
-        return response()->Json($contents);
+        return response()->Json((new \App\Services\Contents\Content())->all());
     }
 
     /**

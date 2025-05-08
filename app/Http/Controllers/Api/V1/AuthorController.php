@@ -62,8 +62,7 @@ class AuthorController
     public function destroy(string $id)
     {
         $author=Author::findOrFail($id);
-        $content=$author->contents;
-        $content->delete();
+        $author->delete();
         return response()->Json(['message' => 'Author deleted successfully.']);
     }
 
