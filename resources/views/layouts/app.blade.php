@@ -10,7 +10,7 @@
 <x-header />
 
 
-<div class="container mt-5">
+<div class="container mt-5 min-vh-100">
     @yield('content')
 </div>
 <x-footer />

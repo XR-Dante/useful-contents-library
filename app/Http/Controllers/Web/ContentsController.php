@@ -10,10 +10,24 @@ use Illuminate\Http\Request;
 
 class ContentsController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $contents = (new \App\Services\Contents\Content())->all();
-        return view('contents.index', ['contents'=>$contents]);
+//        $query = Content::query();
+//
+//        if ($request->has('category')) {
+//            $query->where('category_id', $request->category);
+//        }
+//
+//        $contents = $query->get();
+//
+//        return view('contents.index', compact('contents'));
+
+//        $contents = (new \App\Services\Contents\Content())->all();
+        $contents = Content::query();
+        if($request->has('category_id')) {
+            $contents->where('category_id', $request->get('category_id'));
+        }
+        return view('contents.index', ['contents' => $contents->get()]);
     }
 
     public function create()

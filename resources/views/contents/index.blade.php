@@ -12,7 +12,6 @@
                 <div class="col-md-4 mb-4">
                     <div class="card h-100">
 
-                        {{-- YouTube video embed --}}
                         @if(Str::contains($content->url, ['youtube.com', 'youtu.be']))
                             <div class="ratio ratio-16x9">
                                 <iframe width="100%" height="315"
@@ -25,18 +24,18 @@
                                 </iframe>
                             </div>
                         @else
-                            {{-- Agar bu YouTube bo'lmasa, fallback rasm --}}
-                            <img src="{{ asset('image/images.jpg') }}" alt="Image" class="card-img-top" style="height: 250px; object-fit: cover;">
+                            <img src="{{ $content->authors->first()->url }}" alt="Image" class="card-img-top" style="height: 250px; object-fit: contain;">
                         @endif
 
                         <div class="card-body">
                             <h5 class="card-title">{{ $content->title }}</h5>
+                            <h5 class="card-title">{{ $content->description }}</h5>
                             <p class="card-text">
                                 <strong>Authors:</strong> {{ $content->authors->pluck('name')->join(', ') }}
                             </p>
 
                             @unless(Str::contains($content->url, ['youtube.com', 'youtu.be']))
-                                <a href="{{ $content->url }}" class="card-link text-decoration-underline text-primary" target="_blank">External Link</a>
+                                <a href="{{ $content->url }}" class="card-link text-decoration-underline text-primary" target="_blank">Show book</a>
                             @endunless
                         </div>
 
@@ -53,7 +52,7 @@
                                 <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                             </form>
                         </div>
-                        @dump($content->authors)
+{{--                        @dump($content->authors)--}}
 
                     </div>
                 </div>

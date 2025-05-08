@@ -1,11 +1,11 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Web\AboutController;
 use App\Http\Controllers\Web\AuthorsController;
 use App\Http\Controllers\Web\CategoriesController;
 use App\Http\Controllers\Web\ContentsController;
 use App\Http\Controllers\Web\GenresController;
-use App\Http\Controllers\Web\HomeController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -37,4 +37,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('/authors', AuthorsController::class);
     Route::resource('/genres', GenresController::class);
     Route::resource('/categories', CategoriesController::class);
+    Route::resource('/home', ContentsController::class);
+    Route::resource('about', AboutController::class);
+    Route::get('/contact', [AboutController::class, 'contact']);
 });
