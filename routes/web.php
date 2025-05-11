@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Web\AboutController;
+use App\Http\Controllers\Web\AllController;
 use App\Http\Controllers\Web\AuthorsController;
 use App\Http\Controllers\Web\CategoriesController;
 use App\Http\Controllers\Web\ContentsController;
@@ -40,4 +41,5 @@ Route::middleware('auth')->group(function () {
     Route::resource('/home', ContentsController::class);
     Route::resource('about', AboutController::class);
     Route::get('/contact', [AboutController::class, 'contact']);
+    Route::post('/createall', [AllController::class, 'create']);
 });

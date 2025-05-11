@@ -3,12 +3,15 @@
 
 @section('content')
     <div class="container">
-        <h2>Authors list</h2>
+        <h1>Authors</h1>
+        @hasrole('admin')
+        @can('create')
         <a href="{{ route('authors.create') }}" class="btn btn-primary">Create new author</a>
+        @endcan
+        @endhasrole
         <table class="table mt-3">
             <thead>
             <tr>
-                <th>#</th>
                 <th>Name</th>
                 <th>URL</th>
 
@@ -17,13 +20,16 @@
             <tbody>
             @foreach ($authors as $author)
                 <tr>
-                    <td>{{ $author->id }}</td>
+
                     <td>{{ $author->name }}</td>
                     <td>{{ $author->url }}</td>
                     <td>
+                        @hasrole('admin')
                         @can('edit')
                         <a href="{{ route('authors.edit', $author->id) }}" class="btn btn-warning">Edit</a>
                         @endcan
+
+
 
                         @can('delete')
                         <form action="{{ route('authors.destroy', $author->id) }}" method="POST" style="display:inline;">
@@ -32,6 +38,7 @@
                             <button type="submit" class="btn btn-danger">Delete</button>
                         </form>
                             @endcan
+                        @endhasrole
 
                     </td>
                 </tr>

@@ -3,8 +3,12 @@
 
 @section('content')
     <div class="container">
-        <h2>Categories list</h2>
+        <h1>Categories</h1>
+        @hasrole('admin')
+        @can('create')
         <a href="{{ route('categories.create') }}" class="btn btn-primary">Create new category</a>
+        @endcan
+        @endhasrole
         <table class="table mt-3">
             <thead>
             <tr>
@@ -21,11 +25,10 @@
                     <td>
                         @hasrole('admin')
                         @can('edit')
-                        <a href="{{ route('categories.edit', $category->id) }}" class="btn btn-warning">Edit</a>
+                            <a href="{{ route('categories.edit', $category->id) }}" class="btn btn-warning">Edit</a>
                         @endcan
-                        @endhasrole
-                        @hasrole('admin')
-                        @can('edit')
+
+                        @can('delete')
                         <form action="{{ route('categories.destroy', $category->id) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('DELETE')
