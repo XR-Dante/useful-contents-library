@@ -119,10 +119,23 @@
                     </a>
                 </h2>
 
-                <div class="responsive-iframe mb-4">
-                    <iframe src="{{ $content->url }}" allowfullscreen
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
-                </div>
+                @if(Str::contains($content->url, ['youtube.com', 'youtu.be']))
+                        <div class="ratio ratio-16x9">
+                            <iframe
+                                src="{{ Str::contains($content->url, 'watch?v=')
+                                    ? str_replace('watch?v=', 'embed/', $content->url)
+                                    : str_replace('youtu.be/', 'www.youtube.com/embed/', $content->url) }}"
+                                title="{{ $content->title }}"
+                                frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen>
+                            </iframe>
+                        </div>
+                    @elseif(Str::endsWith($content->url, ['.jpg', '.jpeg', '.png', '.gif', '.webp']))
+                        <img src="{{ $content->url }}" alt="{{ $content->title }}" class="card-img-top" style="height: 250px; object-fit: contain;">
+                    @else
+                        <img src="{{ asset('images/default-image.png') }}" alt="Default image" class="card-img-top" style="height: 250px; object-fit: contain;">
+                    @endif
 
                 <button class="btn"><i class="fa fa-home"></i></button>
                 <div class="d-flex gap-3 flex-wrap mb-4">

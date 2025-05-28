@@ -45,7 +45,7 @@ services:
         working_dir: /var/www
         volumes:
             - .:/var/www
-            - /var/www/node_modules  # node_modules ni konteyner ichida saqlash (hostda emas)
+            - /var/www/node_modules 
         ports:
             - "5173:5173"
         networks:

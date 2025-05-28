@@ -4,15 +4,15 @@ import vue from '@vitejs/plugin-vue';
 
 export default defineConfig({
     server: {
-        host: '0.0.0.0', // Docker konteynerdan tashqariga ochish uchun
-        port: 5173,      // Vite frontend porti
+        host: '0.0.0.0',
+        port: 5173,
         hmr: {
-            host: 'localhost', // Localhost orqali hot reload qilish
+            host: 'localhost',
         },
     },
     plugins: [
         laravel({
-            input: ['resources/js/app.js'], // Laravel Vite kirish fayli
+            input: ['resources/js/app.js'],
             refresh: true,
         }),
         vue({
