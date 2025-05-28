@@ -30,6 +30,31 @@ class ContentsController extends Controller
         return view('contents.index', ['contents' => $contents->get()]);
     }
 
+    public function show($id)
+    {
+        $content = Content::with('comments.user', 'category')->findOrFail($id);
+        return view('contents.show', compact('content'));
+    }
+
+   public function storeComment(Request $request, $contentId)
+{
+    $request->validate([
+        'body' => 'required|string|max:1000',
+    ]);
+
+    $content = Content::findOrFail($contentId);
+
+    $content->comments()->create([
+        'user_id' => auth()->id(),
+        'body' => $request->body,
+    ]);
+
+    return redirect()->back()->with('success', 'Izoh muvaffaqiyatli qo‘shildi!');
+}
+
+
+
+
     public function create()
     {
         $categories = Category::all();

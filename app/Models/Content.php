@@ -25,4 +25,28 @@ class Content extends Model
     {
         return $this->belongsToMany(Author::class, 'author_content');
     }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+
+
+    public function relatedContents()
+    {
+        $query = Content::query()
+            ->where('id', '!=', $this->id);
+
+        if ($this->category_id) {
+            $query->where('category_id', $this->category_id);
+        }
+
+        if (property_exists($this, 'genre_id') && $this->genre_id) {
+            $query->orWhere('genre_id', $this->genre_id);
+        }
+
+        return $query->limit(4)->get();
+    }
+
 }

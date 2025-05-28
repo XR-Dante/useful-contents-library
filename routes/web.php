@@ -34,12 +34,14 @@ require __DIR__.'/auth.php';
 
 
 Route::middleware('auth')->group(function () {
-    Route::resource('/contents', ContentsController::class);
+    Route::resource('contents', ContentsController::class);
     Route::resource('/authors', AuthorsController::class);
     Route::resource('/genres', GenresController::class);
     Route::resource('/categories', CategoriesController::class);
     Route::resource('/home', ContentsController::class);
     Route::resource('about', AboutController::class);
+    Route::get('/contents/{id}', [ContentsController::class, 'show'])->name('contents.show');
+    Route::post('/contents/{content}/comment', [ContentsController::class, 'storeComment'])->name('contents.storeComment');
     Route::get('/contact', [AboutController::class, 'contact']);
     Route::post('/createall', [AllController::class, 'create']);
 });

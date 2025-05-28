@@ -3,11 +3,13 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use App\Models\Author;
-
-class AuthorFactory extends Factory
+use App\Models\Category;
+/**
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Category>
+ */
+class CategoryFactory extends Factory
 {
-    protected $author = Author::class;
+    protected $model = Category::class;
     /**
      * Define the model's default state.
      *
@@ -17,7 +19,6 @@ class AuthorFactory extends Factory
     {
         return [
             'name' => $this->faker->word(),
-            'url'  => $this->faker->url(),
         ];
     }
 }

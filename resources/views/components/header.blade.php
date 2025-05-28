@@ -33,7 +33,6 @@
                         <li><a class="dropdown-item" href="/contents?category_id={{ $category->id }}">{{ $category->name }}</a></li>
                     @endforeach
                 </ul>
-
             </div>
 
 
