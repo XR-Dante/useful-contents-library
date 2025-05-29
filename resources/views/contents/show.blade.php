@@ -207,10 +207,23 @@
                     @if($relateds->isNotEmpty())
                         @foreach($relateds as $related)
                             <div class="hover-card mb-3">
-                                <div class="responsive-iframe">
-                                    <iframe src="{{ $related->url }}" allowfullscreen
-                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
-                                </div>
+                                @if(Str::contains($related->url, ['youtube.com', 'youtu.be']))
+                                    <div class="ratio ratio-16x9">
+                                        <iframe
+                                            src="{{ Str::contains($related->url, 'watch?v=')
+                                                ? str_replace('watch?v=', 'embed/', $related->url)
+                                                : str_replace('youtu.be/', 'www.youtube.com/embed/', $related->url) }}"
+                                            title="{{ $related->title }}"
+                                            frameborder="0"
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                            allowfullscreen>
+                                        </iframe>
+                                    </div>
+                                @elseif(Str::endsWith($related->url, ['.jpg', '.jpeg', '.png', '.gif', '.webp']))
+                                    <img src="{{ $related->url }}" alt="{{ $related->title }}" class="card-img-top" style="height: 250px; object-fit: contain;">
+                                @else
+                                    <img src="{{ asset('images/default-image.png') }}" alt="Default image" class="card-img-top" style="height: 250px; object-fit: contain;">
+                                @endif
                                 <div class="card-body p-2">
                                     <a href="{{ route('contents.show', $related->id) }}"
                                        class="fw-semibold text-dark text-decoration-none">

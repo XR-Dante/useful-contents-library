@@ -23,17 +23,24 @@
                         </a>
                     @endif
                 </div>
+
+                <div class="dropdown">
+                    <button class="btn btn-light p-2" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Categories
+                    </button>
+                    <ul class="dropdown-menu">
+                        @foreach($categories as $category)
+                            <li><a class="dropdown-item" href="/contents?category_id={{ $category->id }}">{{ $category->name }}</a></li>
+                        @endforeach
+                    </ul>
+                </div>
+
             </div>
-            <div class="dropdown">
-                <button class="btn btn-light p-2" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Categories
-                </button>
-                <ul class="dropdown-menu">
-                    @foreach($categories as $category)
-                        <li><a class="dropdown-item" href="/contents?category_id={{ $category->id }}">{{ $category->name }}</a></li>
-                    @endforeach
-                </ul>
-            </div>
+
+
+            <button class="btn btn-light p-2" type="button"  onclick="window.location.href='{{ route('login') }}'" style="color: red">
+                    Login
+            </button>
 
 
         </div>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\V1\ContentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Web\AboutController;
 use App\Http\Controllers\Web\AllController;
@@ -20,6 +21,8 @@ Route::get('/', function () {
     ]);
 });
 
+
+
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -32,15 +35,17 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
+Route::get('/', [ContentsController::class, 'index'])->name('home');
+Route::get('/contents/{id}', [ContentsController::class, 'show']);
+Route::resource('categories', CategoriesController::class);
+Route::resource('home', ContentsController::class);
+Route::resource('about', AboutController::class);
+Route::resource('contents', ContentsController::class);
+Route::resource('/authors', AuthorsController::class);
+Route::resource('/genres', GenresController::class);
 
 Route::middleware('auth')->group(function () {
-    Route::resource('contents', ContentsController::class);
-    Route::resource('/authors', AuthorsController::class);
-    Route::resource('/genres', GenresController::class);
-    Route::resource('/categories', CategoriesController::class);
-    Route::resource('/home', ContentsController::class);
-    Route::resource('about', AboutController::class);
-    Route::get('/contents/{id}', [ContentsController::class, 'show'])->name('contents.show');
+
     Route::post('/contents/{content}/comment', [ContentsController::class, 'storeComment'])->name('contents.storeComment');
     Route::get('/contact', [AboutController::class, 'contact']);
     Route::post('/createall', [AllController::class, 'create']);
