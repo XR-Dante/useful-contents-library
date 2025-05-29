@@ -1,0 +1,38 @@
+name: Imtihon Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    name: Deploy to server
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup SSH
+        run : |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          echo -e "HOST *\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
+
+      - name: Deploy via SSH
+        run : |
+          ssh -i ~/.ssh/id_rsa xolbekhayitov005@35.222.227.169 << 'EOF'
+            cd /home/xolbekhayitov005/useful-contents-library
+            git pull origin main
+            docker exec content-app composer install --no-interaction --prefer-dist --optimize-autoloader
+            docker exec content-app php artisan config:clear
+            docker exec content-app php artisan route:clear
+            docker exec content-app php artisan view:clear
+            docker exec content-app php artisan cache:clear
+            docker exec content-app php artisan config:cache
+            docker exec content-app php artisan optimize
+          EOF
+
+
